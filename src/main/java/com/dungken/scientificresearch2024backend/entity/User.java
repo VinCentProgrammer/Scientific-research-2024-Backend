@@ -3,6 +3,8 @@ package com.dungken.scientificresearch2024backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -43,6 +45,9 @@ public class User {
 
     @Column(name = "last_name")
     private String lastname;
+
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
     @Column(name = "avatar", columnDefinition = "LONGTEXT")
     @Lob

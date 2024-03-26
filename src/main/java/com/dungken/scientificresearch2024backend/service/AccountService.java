@@ -8,6 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,6 +24,7 @@ public class AccountService {
 
     @Autowired
     private MailServiceImpl mailService;
+
     public ResponseEntity<?> registerUser(User user){
         // Kiểm tra tên đăng nhập đã tồn tại chưa?
         if(userRepository.existsByUsername(user.getUsername())){
@@ -38,6 +43,8 @@ public class AccountService {
         // Set thong tin kich hoat tai khoan user
         user.setActive(false);
         user.setActiveCode(generateActivationCode());
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        user.setCreatedAt(currentTimestamp);
 
         // Lưu người dùng người dùng vào DB
         userRepository.save(user);
@@ -48,13 +55,15 @@ public class AccountService {
         return ResponseEntity.ok("Sign Up Success");
     }
 
+
+
     private String generateActivationCode(){
         // Tạo mã ngẫu nhiên
         return UUID.randomUUID().toString();
     }
 
     private void sendActivationEmail(String email, String activeCode){
-        String subject = "Kích hoạt tài khoản của bạn tại Website hỗ trợ toán rời rạc";
+        String subject = "Kích hoạt tài khoản của bạn tại Website hỗ trợ học toán rời rạc";
         String text = "Vui lòng sử dụng mã sau để kich hoạt cho tài khoản <"+email+">:" +
                 "<html><body><br/><h1>"+activeCode+"</h1></body></html>";
         text+="<br/> Click vào đường link để kích hoạt tài khoản: ";
@@ -82,4 +91,75 @@ public class AccountService {
             return ResponseEntity.badRequest().body(new Notification("Activation code is incorrect!"));
         }
     }
+
+    public ResponseEntity<?> resetPassUser(User user){
+        // Kiểm tra email có tồn tại trong hệ thống không?
+        if(!userRepository.existsByEmail(user.getEmail())){
+            return ResponseEntity.badRequest().body(new Notification("Email unavailable."));
+        }
+
+        // Lấy người dùng từ cơ sở dữ liệu
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser == null) {
+            return ResponseEntity.badRequest().body(new Notification("User not found"));
+        }
+
+        // Set thong tin kich hoat tai khoan user
+        existingUser.setActive(false);
+        existingUser.setActiveCode(generateActivationCode());
+
+        // Cập nhật người dùng trong DB
+        userRepository.save(existingUser);
+
+        // Gui mail xác nhận người dùng biết là chính xác lấy lại mật khẩu
+        sendMailResetPassword(existingUser.getEmail(), existingUser.getActiveCode());
+
+        return ResponseEntity.ok("Sent authentication successfully!");
+    }
+
+    private void sendMailResetPassword(String email, String activeCode){
+        String subject = "Yêu cầu lấy lại mật khẩu của bạn tại Website hỗ trợ học toán rời rạc";
+        String text ="Click vào đường link để lấy lại mật khẩu: ";
+        String url = "http://localhost:3000/reset-pass/"+email+"/"+activeCode;
+        text+=("<br/> <a href="+url+">"+url+"</a> ");
+
+        mailService.sendMail("phpmaster.dungken.dev@gmail.com", email, subject, text);
+    }
+
+    public ResponseEntity<?> resetPasswordAccount(String email, String activeCode) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new Notification("User does not exist!"));
+        }
+
+        if (user.isActive()) {
+            return ResponseEntity.badRequest().body(new Notification("Account has been activated!"));
+        }
+
+        if (activeCode.equals(user.getActiveCode())) {
+            user.setActive(true);
+            userRepository.save(user);
+            return ResponseEntity.ok("Password recovery successful!");
+        } else {
+            return ResponseEntity.badRequest().body(new Notification("Activation code is incorrect!"));
+        }
+    }
+
+    public ResponseEntity<?> updatePassword(User user) {
+        User userExisting = userRepository.findByEmail(user.getEmail());
+
+        if (user == null) {
+            return ResponseEntity.badRequest().body(new Notification("User does not exist!"));
+        }
+
+        // Mã hóa mật khẩu
+        String encryptPassword = passwordEncoder.encode(user.getPassword());
+        userExisting.setPassword(encryptPassword);
+
+        userRepository.save(userExisting);
+        return ResponseEntity.ok("Password recovery successful!");
+    }
+
+
 }

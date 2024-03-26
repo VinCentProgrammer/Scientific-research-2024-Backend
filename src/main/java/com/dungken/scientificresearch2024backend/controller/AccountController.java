@@ -38,6 +38,25 @@ public class AccountController {
         return response;
     }
 
+    @PutMapping("/reset-password")
+    public ResponseEntity<?> resetPassUser(@Validated @RequestBody User user){
+        ResponseEntity<?> response = accountService.resetPassUser(user);
+        return response;
+    }
+
+    @PutMapping("/update-password")
+    public ResponseEntity<?> updatePassword(@Validated @RequestBody User user){
+        ResponseEntity<?> response = accountService.updatePassword(user);
+        return response;
+    }
+
+    @GetMapping("/reset-pass")
+    public ResponseEntity<?> resetPass(@RequestParam String email, @RequestParam String activeCode){
+        ResponseEntity<?> response = accountService.resetPasswordAccount(email, activeCode);
+        return response;
+    }
+
+
     @GetMapping("/active")
     public ResponseEntity<?> activeAccount(@RequestParam String email, @RequestParam String activeCode){
         ResponseEntity<?> response = accountService.activeAccount(email, activeCode);

@@ -3,6 +3,7 @@ package com.dungken.scientificresearch2024backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.List;
 @Entity
 @Data
@@ -19,6 +20,10 @@ public class Role {
     @Column(name = "`desc`")
     private String desc;
 
+    @Column(name = "`created_at`")
+    private Date createAt;
+
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -29,4 +34,15 @@ public class Role {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private List<Permission> permissions;
 }

@@ -39,6 +39,9 @@ public class JwtService {
                 if (q.getRoleName().equals("ADMIN")) {
                     isAdmin = true;
                 }
+                if (q.getRoleName().equals("STAFF")) {
+                    isStaff = true;
+                }
                 if (q.getRoleName().equals("USER")) {
                     isUser = true;
                 }
@@ -46,6 +49,7 @@ public class JwtService {
         }
 
         claims.put("isAdmin", isAdmin);
+        claims.put("isStaff", isStaff);
         claims.put("isUser", isUser);
 
         return createToken(claims, username);
@@ -57,7 +61,8 @@ public class JwtService {
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+30*60*1000)) // JWT hết hạn sau 30 phút
-                .signWith(SignatureAlgorithm.ES256,getSigneKey())
+//                .signWith(SignatureAlgorithm.ES256,getSigneKey())
+                .signWith(Keys.hmacShaKeyFor(SERECT.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -78,7 +83,7 @@ public class JwtService {
         return claimsTFunction.apply(claims);
     }
 
-    // Kiểm tra tời gian hết hạn từ JWT
+    // Kiểm tra thời gian hết hạn từ JWT
     public Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }

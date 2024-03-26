@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 public class MethodRestConfig implements RepositoryRestConfigurer {
-    private String url = "http://localhost:3000";
     private EntityManager entityManager;
 
     @Autowired
