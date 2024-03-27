@@ -5,10 +5,13 @@ public class Endpoints {
     /////////////// PUBLIC ///////////////
     public static final String[] PUBLIC_GET_ENDPOINS = {
             "/account/active",
-            "/account/reset-pass"
+            "/account/reset-pass",
+            "/user/search/existsByUsername",
+            "/user/search/existsByEmail",
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
+            "/user",
             "/account/reset-password",
             "/account/update-password"
     };
@@ -16,7 +19,8 @@ public class Endpoints {
     public static final String[] PUBLIC_POST_ENDPOINS = {
             "/account/register",
             "/account/reset-password",
-            "account/login"
+            "/account/login",
+
     };
 
 //    public static final String[] PUBLIC_DELETE_ENDPOINS = {
@@ -27,15 +31,12 @@ public class Endpoints {
     public static final String[] ADMIN_GET_ENDPOINS = {
             "/user",
             "/user/**",
+            "/user/search/findByUsernameContaining/**"
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
-            "user/add",
-            "account/login"
+            "/user/**",
+            "/user",
+            "/account/login",
+            "/account/register"
     };
-//    public static final String[] ADMIN_PUT_ENDPOINS = {
-//
-//    };
-//    public static final String[] ADMIN_DELETE_ENDPOINS = {
-//
-//    };
 }

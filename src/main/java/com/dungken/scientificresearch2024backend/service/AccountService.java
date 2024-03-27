@@ -16,14 +16,17 @@ import java.util.UUID;
 
 @Service
 public class AccountService {
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private MailServiceImpl mailService;
+    @Autowired
+    public AccountService(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, MailServiceImpl mailService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.mailService = mailService;
+    }
 
     public ResponseEntity<?> registerUser(User user){
         // Kiểm tra tên đăng nhập đã tồn tại chưa?

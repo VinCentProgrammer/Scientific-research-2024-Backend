@@ -19,16 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/account")
 public class AccountController {
-
     @Autowired
     private AccountService accountService;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     private JwtService jwtService;
 

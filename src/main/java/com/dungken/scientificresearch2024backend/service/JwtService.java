@@ -23,26 +23,26 @@ public class JwtService {
     public static final String SERECT = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
 
     @Autowired
-    private UserService userService;
+    private  UserService userService;
 
     // Tạo JWT dựa trên tên đang nhập
-    public String generateToken(String username) {
+    public String generateToken(String tenDangNhap){
         Map<String, Object> claims = new HashMap<>();
-        User user = userService.findByUsername(username);
+        User user = userService.findByUsername(tenDangNhap);
 
         boolean isAdmin = false;
         boolean isStaff = false;
         boolean isUser = false;
-        if (user != null && user.getRoles().size() > 0) {
-            List<Role> list = user.getRoles();
-            for (Role q : list) {
-                if (q.getRoleName().equals("ADMIN")) {
+        if (user!=null && user.getRoles().size()>0){
+            List<Role> list =  user.getRoles();
+            for (Role q: list) {
+                if(q.getRoleName().equals("ADMIN")){
                     isAdmin = true;
                 }
-                if (q.getRoleName().equals("STAFF")) {
+                if(q.getRoleName().equals("STAFF")){
                     isStaff = true;
                 }
-                if (q.getRoleName().equals("USER")) {
+                if(q.getRoleName().equals("USER")){
                     isUser = true;
                 }
             }
@@ -52,17 +52,17 @@ public class JwtService {
         claims.put("isStaff", isStaff);
         claims.put("isUser", isUser);
 
-        return createToken(claims, username);
+        return createToken(claims, tenDangNhap);
     }
 
-    private  String createToken(Map<String, Object> claims, String username){
+    // Tạo JWT với các claim đã chọn
+    private  String createToken(Map<String, Object> claims, String tenDangNhap){
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(username)
+                .setSubject(tenDangNhap)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+30*60*1000)) // JWT hết hạn sau 30 phút
-//                .signWith(SignatureAlgorithm.ES256,getSigneKey())
-                .signWith(Keys.hmacShaKeyFor(SERECT.getBytes()), SignatureAlgorithm.HS256)
+                .signWith(SignatureAlgorithm.HS256,getSigneKey())
                 .compact();
     }
 
@@ -83,7 +83,7 @@ public class JwtService {
         return claimsTFunction.apply(claims);
     }
 
-    // Kiểm tra thời gian hết hạn từ JWT
+    // Kiểm tra tời gian hết hạn từ JWT
     public Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }
@@ -100,8 +100,8 @@ public class JwtService {
 
     // Kiểm tra tính hợp lệ
     public Boolean validateToken(String token, UserDetails userDetails){
-        final String username = extractUsername(token);
-        System.out.println(username);
-        return (username.equals(userDetails.getUsername())&&!isTokenExpired(token));
+        final String tenDangNhap = extractUsername(token);
+        System.out.println(tenDangNhap);
+        return (tenDangNhap.equals(userDetails.getUsername())&&!isTokenExpired(token));
     }
 }
