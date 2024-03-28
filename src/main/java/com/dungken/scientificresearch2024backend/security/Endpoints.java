@@ -31,12 +31,27 @@ public class Endpoints {
     public static final String[] ADMIN_GET_ENDPOINS = {
             "/user",
             "/user/**",
-            "/user/search/findByUsernameContaining/**"
+            "/user/search/findByUsernameContaining/**",
+            "/permission",
+            "/permission/**"
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/user/**",
             "/user",
             "/account/login",
-            "/account/register"
+            "/account/register",
+            "/permission",
+            "/permission/**"
+    };
+    public static final String[] ADMIN_PUT_ENDPOINS = {
+            "/permission",
+            "/permission/**",
+            "/user/**",
+            "/account/update",
+
+    };
+    public static final String[] ADMIN_DELETE_ENDPOINS = {
+            "/user/**",
+            "/permission/**"
     };
 }

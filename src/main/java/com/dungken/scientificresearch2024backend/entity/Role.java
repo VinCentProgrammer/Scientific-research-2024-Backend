@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 @Entity
 @Data
@@ -21,8 +22,10 @@ public class Role {
     private String desc;
 
     @Column(name = "`created_at`")
-    private Date createAt;
+    private Timestamp createAt;
 
+    @Column(name = "`updated_at`")
+    private Timestamp updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,

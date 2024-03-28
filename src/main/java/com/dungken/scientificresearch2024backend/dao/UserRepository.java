@@ -8,6 +8,7 @@ import java.util.List;
 
 @RepositoryRestResource(path = "user")
 public interface UserRepository extends JpaRepository<User, Integer> {
+    public User findByUserId(int id);
     public User findByUsername(String username);
     public User findByEmail(String email);
     public boolean existsByUsername(String username);

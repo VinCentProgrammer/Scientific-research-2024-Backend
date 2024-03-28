@@ -58,6 +58,37 @@ public class AccountService {
         return ResponseEntity.ok("Sign Up Success");
     }
 
+    public ResponseEntity<?> updateUser(User user){
+
+        User userUpdate = userRepository.findByUserId(user.getUserId());
+        if(userUpdate == null) {
+            return ResponseEntity.badRequest().body(new Notification("User khong ton tai!"));
+        }
+        // Kiểm tra tên đăng nhập, email co ton tai hay khong?
+        if(userRepository.existsByUsername(userUpdate.getUsername()) && userRepository.existsByEmail(userUpdate.getEmail())){
+            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+            userUpdate.setUsername(user.getUsername());
+            userUpdate.setEmail(user.getEmail());
+            userUpdate.setFirstname(user.getFirstname());
+            userUpdate.setLastname(user.getLastname());
+            userUpdate.setGender(user.isGender());
+            userUpdate.setAddress(user.getAddress());
+            userUpdate.setAvatar(user.getAvatar());
+            userUpdate.setComment(user.getComment());
+            userUpdate.setPhoneNumber(user.getPhoneNumber());
+            userUpdate.setUpdatedAt(currentTimestamp);
+
+
+            // Cap nhat nguoi dung vao DB
+            userRepository.saveAndFlush(userUpdate);
+
+            return ResponseEntity.ok("Update Success");
+        } else {
+            return ResponseEntity.badRequest().body(new Notification("Username or email unavailable."));
+        }
+    }
+
 
 
     private String generateActivationCode(){

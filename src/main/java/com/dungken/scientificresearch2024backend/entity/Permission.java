@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -15,14 +16,29 @@ public class Permission {
     @Column(name = "permission_id")
     private int permissionId;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "slug")
     private String slug;
 
     @Column(name = "`desc`")
     private String desc;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "`created_at`")
+    private Timestamp createdAt;
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "`updated_at`")
+    private Timestamp updatedAt;
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,

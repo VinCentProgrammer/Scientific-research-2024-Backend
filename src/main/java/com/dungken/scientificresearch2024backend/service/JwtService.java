@@ -48,9 +48,11 @@ public class JwtService {
             }
         }
 
+        claims.put("userId", user.getUserId());
         claims.put("isAdmin", isAdmin);
         claims.put("isStaff", isStaff);
         claims.put("isUser", isUser);
+
 
         return createToken(claims, tenDangNhap);
     }
@@ -101,7 +103,6 @@ public class JwtService {
     // Kiểm tra tính hợp lệ
     public Boolean validateToken(String token, UserDetails userDetails){
         final String tenDangNhap = extractUsername(token);
-        System.out.println(tenDangNhap);
         return (tenDangNhap.equals(userDetails.getUsername())&&!isTokenExpired(token));
     }
 }

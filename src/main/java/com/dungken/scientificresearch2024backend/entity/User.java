@@ -48,6 +48,9 @@ public class User {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
+
     @Column(name = "avatar", columnDefinition = "LONGTEXT")
     @Lob
     private String avatar;

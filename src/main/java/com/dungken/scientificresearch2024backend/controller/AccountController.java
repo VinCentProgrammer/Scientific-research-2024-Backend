@@ -32,6 +32,12 @@ public class AccountController {
         return response;
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@Validated @RequestBody User user){
+        ResponseEntity<?> response = accountService.updateUser(user);
+        return response;
+    }
+
     @PutMapping("/reset-password")
     public ResponseEntity<?> resetPassUser(@Validated @RequestBody User user){
         ResponseEntity<?> response = accountService.resetPassUser(user);
