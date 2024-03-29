@@ -47,9 +47,17 @@ public class User {
 
     @Column(name = "created_at")
     private Timestamp createdAt;
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @Column(name = "avatar", columnDefinition = "LONGTEXT")
     @Lob

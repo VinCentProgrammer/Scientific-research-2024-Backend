@@ -22,10 +22,20 @@ public class Role {
     private String desc;
 
     @Column(name = "`created_at`")
-    private Timestamp createAt;
+    private Timestamp createdAt;
+
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @Column(name = "`updated_at`")
     private Timestamp updatedAt;
+
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,

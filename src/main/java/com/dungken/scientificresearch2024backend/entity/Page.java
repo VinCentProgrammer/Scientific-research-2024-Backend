@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @Entity
 @Data
 @Table(name = "page")
@@ -19,10 +21,23 @@ public class Page {
     @Column(name = "short_desc")
     private String shortDesc;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "`created_at`")
+    private Timestamp createdAt;
 
-    @Column(name = "detail")
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "`updated_at`")
+    private Timestamp updatedAt;
+
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "detail", length = 1025)
     private String detail;
 
     @ManyToOne(cascade = {

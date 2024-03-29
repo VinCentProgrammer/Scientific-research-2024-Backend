@@ -29,29 +29,39 @@ public class Endpoints {
 
     /////////////// ADMIN ///////////////
     public static final String[] ADMIN_GET_ENDPOINS = {
+            "/role",
+            "/role/**",
             "/user",
             "/user/**",
             "/user/search/findByUsernameContaining/**",
             "/permission",
-            "/permission/**"
+            "/permission/**",
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
+            "/api/user/add",
+            "/account/register",
             "/user/**",
             "/user",
             "/account/login",
-            "/account/register",
             "/permission",
-            "/permission/**"
+            "/permission/**",
+            "/role/add",
+            "/role/**",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
+            "/api/user/update",
             "/permission",
             "/permission/**",
             "/user/**",
             "/account/update",
-
+            "/role",
+            "/role/**",
+            "/role/update",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
-            "/permission/**"
+            "/permission/**",
+            "/role",
+            "/role/**"
     };
 }

@@ -1,7 +1,11 @@
 package com.dungken.scientificresearch2024backend.service;
 
+import com.dungken.scientificresearch2024backend.dao.RoleRepository;
 import com.dungken.scientificresearch2024backend.dao.UserRepository;
+import com.dungken.scientificresearch2024backend.dto.UserRequest;
 import com.dungken.scientificresearch2024backend.entity.Notification;
+import com.dungken.scientificresearch2024backend.entity.Permission;
+import com.dungken.scientificresearch2024backend.entity.Role;
 import com.dungken.scientificresearch2024backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,11 +26,92 @@ public class AccountService {
     private UserRepository userRepository;
 
     private MailServiceImpl mailService;
+
+    private RoleRepository roleRepository;
+
     @Autowired
-    public AccountService(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, MailServiceImpl mailService) {
+    public AccountService(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, MailServiceImpl mailService, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.roleRepository = roleRepository;
+    }
+
+    public ResponseEntity<?> addUser(UserRequest userRequest){
+        // Kiểm tra tên đăng nhập đã tồn tại chưa?
+        if(userRepository.existsByUsername(userRequest.getUsername())){
+            return ResponseEntity.badRequest().body(new Notification("Username available."));
+        }
+
+        // Kiểm tra email đã tồn tại chưa?
+        if(userRepository.existsByEmail(userRequest.getEmail())){
+            return ResponseEntity.badRequest().body(new Notification("Email available."));
+        }
+
+        User savedUser = new User();
+
+        savedUser.setUserId(userRequest.getUserId());
+        savedUser.setUsername(userRequest.getUsername());
+        savedUser.setEmail(userRequest.getEmail());
+        savedUser.setGender(userRequest.isGender());
+        savedUser.setAddress(userRequest.getAddress());
+        savedUser.setLastname(userRequest.getLastname());
+        savedUser.setFirstname(userRequest.getFirstname());
+        savedUser.setPhoneNumber(userRequest.getPhoneNumber());
+        savedUser.setAvatar(userRequest.getAvatar());
+
+
+        String encryptPassword = passwordEncoder.encode(userRequest.getPassword());
+        savedUser.setPassword(encryptPassword);
+
+        savedUser.setActive(false);
+        savedUser.setActiveCode(generateActivationCode());
+
+        List<Role> roles = new ArrayList<>();
+        for(Integer roleId : userRequest.getRoles()) {
+            Role role = roleRepository.findById(roleId).orElse(null);
+            if(role != null) {
+                roles.add(role);
+            }
+        }
+
+        savedUser.setRoles(roles);
+
+        userRepository.save(savedUser);
+        return ResponseEntity.ok(savedUser);
+    }
+
+    public ResponseEntity<?> updateUser(UserRequest userRequest){
+        System.out.println(userRequest.getUserId());
+        User user = userRepository.findByUserId(userRequest.getUserId());
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        user.setUserId(userRequest.getUserId());
+        user.setUsername(userRequest.getUsername());
+        user.setEmail(userRequest.getEmail());
+        user.setGender(userRequest.isGender());
+        user.setAddress(userRequest.getAddress());
+        user.setLastname(userRequest.getLastname());
+        user.setFirstname(userRequest.getFirstname());
+        user.setPhoneNumber(userRequest.getPhoneNumber());
+        user.setAvatar(userRequest.getAvatar());
+
+
+        List<Role> roles = new ArrayList<>();
+        for(Integer roleId : userRequest.getRoles()) {
+            Role role = roleRepository.findById(roleId).orElse(null);
+            if(role != null) {
+                roles.add(role);
+            }
+        }
+
+        user.setRoles(roles);
+
+        userRepository.save(user);
+        return ResponseEntity.ok(user);
     }
 
     public ResponseEntity<?> registerUser(User user){
@@ -46,6 +132,7 @@ public class AccountService {
         // Set thong tin kich hoat tai khoan user
         user.setActive(false);
         user.setActiveCode(generateActivationCode());
+
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         user.setCreatedAt(currentTimestamp);
 
