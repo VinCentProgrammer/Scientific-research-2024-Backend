@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @Entity
 @Data
 @Table(name = "post_detail")
@@ -19,15 +21,25 @@ public class PostDetail {
     @Column(name = "`desc`")
     private String desc;
 
-    @Column(name = "detail")
+    @Column(name = "detail", columnDefinition = "LONGTEXT")
     private String detail;
 
     @Column(name = "thumbnail", columnDefinition = "LONGTEXT")
     @Lob
     private String thumbnail;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "`created_at`")
+    private Timestamp createdAt;
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
+    @Column(name = "`updated_at`")
+    private Timestamp updatedAt;
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
@@ -40,6 +52,7 @@ public class PostDetail {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
+
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

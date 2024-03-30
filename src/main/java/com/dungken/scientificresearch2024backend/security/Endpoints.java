@@ -36,6 +36,10 @@ public class Endpoints {
             "/user/search/findByUsernameContaining/**",
             "/permission",
             "/permission/**",
+            "/post-cat",
+            "/post-cat/**",
+            "/post-detail",
+            "/post-detail/**",
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -47,6 +51,10 @@ public class Endpoints {
             "/permission/**",
             "/role/add",
             "/role/**",
+            "/post-cat",
+            "/post-cat/**",
+            "/post-detail",
+            "/post-detail/**",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
             "/api/user/update",
@@ -57,11 +65,19 @@ public class Endpoints {
             "/role",
             "/role/**",
             "/role/update",
+            "/post-cat",
+            "/post-cat/**",
+            "/post-detail",
+            "/post-detail/**",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
             "/permission/**",
             "/role",
-            "/role/**"
+            "/role/**",
+            "/post-cat",
+            "/post-cat/**",
+            "/post-detail",
+            "/post-detail/**",
     };
 }
