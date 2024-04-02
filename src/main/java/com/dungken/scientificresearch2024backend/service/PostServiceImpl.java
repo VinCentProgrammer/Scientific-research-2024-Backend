@@ -18,4 +18,16 @@ public class PostServiceImpl implements PostService{
     public PostDetail addPost(PostDetail postDetail) {
         return postDetailRepository.save(postDetail);
     }
+
+    @Override
+    public PostDetail updatePost(PostDetail postDetail) {
+        return postDetailRepository.saveAndFlush(postDetail);
+    }
+
+    @Override
+    public PostDetail findById(int id) {
+        return postDetailRepository.findById(id).orElse(null);
+    }
+
+
 }

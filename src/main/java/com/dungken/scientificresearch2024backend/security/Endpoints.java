@@ -39,7 +39,7 @@ public class Endpoints {
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
-            "/post-detail/**",
+            "/post-detail/**"
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -53,8 +53,7 @@ public class Endpoints {
             "/role/**",
             "/post-cat",
             "/post-cat/**",
-            "/post-detail",
-            "/post-detail/**",
+            "/api/post/add",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
             "/api/user/update",
@@ -67,8 +66,9 @@ public class Endpoints {
             "/role/update",
             "/post-cat",
             "/post-cat/**",
-            "/post-detail",
-            "/post-detail/**",
+            "/api/post",
+            "/api/post/**",
+            "/api/post/update",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
@@ -78,6 +78,6 @@ public class Endpoints {
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
-            "/post-detail/**",
+            "/post-detail/**"
     };
 }
