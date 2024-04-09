@@ -8,6 +8,8 @@ public class Endpoints {
             "/account/reset-pass",
             "/user/search/existsByUsername",
             "/user/search/existsByEmail",
+            "/post-detail",
+            "/post-detail/**"
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
@@ -39,7 +41,8 @@ public class Endpoints {
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
-            "/post-detail/**"
+            "/post-detail/**",
+            "/ontology/data",
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
