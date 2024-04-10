@@ -86,23 +86,6 @@
 			<version>0.11.5</version>
 		</dependency>
 
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-			<version>5.1.18</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20210307</version> <!-- Hoặc phiên bản mới nhất -->
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>apache-jena-libs</artifactId>
-			<version>4.3.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>

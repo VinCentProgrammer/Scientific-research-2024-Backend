@@ -3,38 +3,28 @@ package com.dungken.scientificresearch2024backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "post_detail")
-public class PostDetail {
+@Table(name = "keyword")
+public class Keyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
-    private int postId;
+    @Column(name = "keyword_id")
+    private int keywordId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "keyword")
+    private String keyword;
 
-    @Column(name = "`desc`")
-    private String desc;
-
-    @Column(name = "detail", columnDefinition = "LONGTEXT")
-    private String detail;
-
-    @Column(name = "thumbnail", columnDefinition = "LONGTEXT")
-    @Lob
-    private String thumbnail;
-
-    @Column(name = "`created_at`")
+    @Column(name = "created_at")
     private Timestamp createdAt;
     @PrePersist
     private void onCreate() {
         createdAt = new Timestamp(System.currentTimeMillis());
     }
-    @Column(name = "`updated_at`")
+
+    @Column(name = "updated_at")
     private Timestamp updatedAt;
     @PreUpdate
     private void onUpdate() {
@@ -45,13 +35,13 @@ public class PostDetail {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "post_cat_id", nullable = false)
-    private PostCategory postCategory;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "theory_id", nullable = false)
+    private Theory theory;
 }
