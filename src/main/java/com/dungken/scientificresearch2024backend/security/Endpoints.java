@@ -11,7 +11,9 @@ public class Endpoints {
             "/post-detail",
             "/post-detail/**",
             "/theory-detail",
+            "/api/theory/cat/**",
             "/theory-detail/**",
+
             "/theory-cat",
             "/theory-cat/**",
             "/theory-example",
@@ -58,6 +60,7 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/api/theory/cat/**",
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -75,6 +78,7 @@ public class Endpoints {
             "/api/theory/add",
             "/api/theory/cat/add",
             "/api/theory/example/add",
+            "/api/theory/keyword/add",
 
             "/theory-detail",
             "/theory-detail/**",
@@ -102,6 +106,7 @@ public class Endpoints {
             "/api/theory/update",
             "/api/theory/cat/update",
             "/api/theory/example/update",
+            "/api/theory/keyword/update",
 
             "/theory-detail",
             "/theory-detail/**",

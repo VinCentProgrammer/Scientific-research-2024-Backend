@@ -47,13 +47,13 @@ public class TheoryDetail {
     @JoinColumn(name = "theory_cat_id")
     private TheoryCategory theoryCategory;
 
-    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.EAGER, cascade = {
+    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })
     private List<TheoryExample> theoryExamples;
 
-    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.EAGER, cascade = {
+    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })

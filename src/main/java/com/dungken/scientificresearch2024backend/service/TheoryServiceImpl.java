@@ -39,4 +39,11 @@ public class TheoryServiceImpl implements TheoryService{
     public TheoryCategory findTheoryCategoryByCatId(int catId) {
         return theoryCategoryRepository.findById(catId).orElse(null);
     }
+
+    @Override
+    public TheoryDetail findByTheoryCatId(int catId) {
+        return theoryDetailRepository.findByTheoryCatId(catId).orElse(null);
+    }
+
+
 }

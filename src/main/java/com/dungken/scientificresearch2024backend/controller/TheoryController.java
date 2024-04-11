@@ -1,6 +1,7 @@
 package com.dungken.scientificresearch2024backend.controller;
 
 import com.dungken.scientificresearch2024backend.dao.PostCategoryRepository;
+import com.dungken.scientificresearch2024backend.dao.TheoryDetailRepository;
 import com.dungken.scientificresearch2024backend.dao.UserRepository;
 import com.dungken.scientificresearch2024backend.dto.PostRequest;
 import com.dungken.scientificresearch2024backend.dto.TheoryDetailRequest;
@@ -8,19 +9,41 @@ import com.dungken.scientificresearch2024backend.entity.*;
 import com.dungken.scientificresearch2024backend.service.PostService;
 import com.dungken.scientificresearch2024backend.service.TheoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/theory")
 public class TheoryController {
     private UserRepository userRepository;
     private TheoryService theoryService;
+    private TheoryDetailRepository theoryDetailRepository;
 
     @Autowired
-    public TheoryController(UserRepository userRepository, TheoryService theoryService) {
+    public TheoryController(UserRepository userRepository, TheoryService theoryService, TheoryDetailRepository theoryDetailRepository) {
         this.userRepository = userRepository;
         this.theoryService = theoryService;
+        this.theoryDetailRepository = theoryDetailRepository;
+    }
+
+    @GetMapping("/cat/{theoryCatId}")
+    public ResponseEntity<?> getTheoryByCatId(@PathVariable Integer theoryCatId) {
+        Optional<TheoryDetail> theoryDetailOptional = theoryDetailRepository.findByTheoryCatId(theoryCatId);
+        if (theoryDetailOptional.isPresent()) {
+            TheoryDetail theoryDetail = theoryDetailOptional.get();
+            // Giảm dữ liệu trả về chỉ cần các trường cần thiết
+            TheoryDetailRequest reducedDetail = new TheoryDetailRequest();
+            reducedDetail.setContent(theoryDetail.getContent());
+            reducedDetail.setTitle(theoryDetail.getTitle());
+            // Tiếp tục giảm dữ liệu nếu cần thiết
+
+            return new ResponseEntity<>(reducedDetail, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")
