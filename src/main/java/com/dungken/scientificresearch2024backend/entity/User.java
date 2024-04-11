@@ -104,7 +104,7 @@ public class User {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })
-    private List<Theory> theories;
+    private List<TheoryCategory> theoryCategories;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
@@ -122,5 +122,5 @@ public class User {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })
-    private List<Keyword> keywords;
+    private List<TheoryKeyword> theoryKeywords;
 }

@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "keyword")
-public class Keyword {
+@Table(name = "theory_keyword")
+public class TheoryKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "keyword_id")
@@ -42,6 +42,6 @@ public class Keyword {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "theory_id", nullable = false)
-    private Theory theory;
+    @JoinColumn(name = "theory_detail_id", nullable = false)
+    private TheoryDetail theoryDetail;
 }

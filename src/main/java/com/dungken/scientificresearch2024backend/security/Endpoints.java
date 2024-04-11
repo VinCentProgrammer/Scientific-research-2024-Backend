@@ -10,6 +10,14 @@ public class Endpoints {
             "/user/search/existsByEmail",
             "/post-detail",
             "/post-detail/**",
+            "/theory-detail",
+            "/theory-detail/**",
+            "/theory-cat",
+            "/theory-cat/**",
+            "/theory-example",
+            "/theory-example/**",
+            "/theory-keyword",
+            "/theory-keyword/**",
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
@@ -42,6 +50,14 @@ public class Endpoints {
             "/post-cat/**",
             "/post-detail",
             "/post-detail/**",
+            "/theory-detail",
+            "/theory-detail/**",
+            "/theory-cat",
+            "/theory-cat/**",
+            "/theory-example",
+            "/theory-example/**",
+            "/theory-keyword",
+            "/theory-keyword/**",
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -56,6 +72,18 @@ public class Endpoints {
             "/post-cat",
             "/post-cat/**",
             "/api/post/add",
+            "/api/theory/add",
+            "/api/theory/cat/add",
+            "/api/theory/example/add",
+
+            "/theory-detail",
+            "/theory-detail/**",
+            "/theory-cat",
+            "/theory-cat/**",
+            "/theory-example",
+            "/theory-example/**",
+            "/theory-keyword",
+            "/theory-keyword/**",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
             "/api/user/update",
@@ -71,6 +99,18 @@ public class Endpoints {
             "/api/post",
             "/api/post/**",
             "/api/post/update",
+            "/api/theory/update",
+            "/api/theory/cat/update",
+            "/api/theory/example/update",
+
+            "/theory-detail",
+            "/theory-detail/**",
+            "/theory-cat",
+            "/theory-cat/**",
+            "/theory-example",
+            "/theory-example/**",
+            "/theory-keyword",
+            "/theory-keyword/**",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
@@ -80,6 +120,14 @@ public class Endpoints {
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
-            "/post-detail/**"
+            "/post-detail/**",
+            "/theory-detail",
+            "/theory-detail/**",
+            "/theory-cat",
+            "/theory-cat/**",
+            "/theory-example",
+            "/theory-example/**",
+            "/theory-keyword",
+            "/theory-keyword/**",
     };
 }

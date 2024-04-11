@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,7 +18,8 @@ public class TheoryDetail {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "LONGTEXT")
+    @Lob
     private String content;
 
     @Column(name = "created_at")
@@ -41,6 +43,19 @@ public class TheoryDetail {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(mappedBy = "theoryDetail")
-    private Theory theory;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "theory_cat_id")
+    private TheoryCategory theoryCategory;
+
+    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.EAGER, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<TheoryExample> theoryExamples;
+
+    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.EAGER, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<TheoryKeyword> theoryKeywords;
 }

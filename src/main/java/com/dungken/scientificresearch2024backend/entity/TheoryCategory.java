@@ -8,21 +8,21 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "theory")
-public class Theory {
+@Table(name = "theory_cat")
+public class TheoryCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "theory_id")
-    private int theoryId;
+    @Column(name = "theory_cat_id")
+    private int theoryCatId;
 
-    @Column(name = "theory_parent_id")
-    private int theoryParentId;
+    @Column(name = "theory_parent_cat_id")
+    private int theoryParentCatId;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "short_desc")
-    private String short_desc;
+    private String shortDesc;
 
     @Column(name = "created_at")
     private Timestamp createdAt;
@@ -45,19 +45,7 @@ public class Theory {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "theory_detail_id")
+    @OneToOne(mappedBy = "theoryCategory")
     private TheoryDetail theoryDetail;
 
-    @OneToMany(mappedBy = "theory", fetch = FetchType.LAZY, cascade = {
-            CascadeType.DETACH, CascadeType.REFRESH,
-            CascadeType.PERSIST, CascadeType.MERGE,
-    })
-    private List<TheoryExample> theoryExamples;
-
-    @OneToMany(mappedBy = "theory", fetch = FetchType.LAZY, cascade = {
-            CascadeType.DETACH, CascadeType.REFRESH,
-            CascadeType.PERSIST, CascadeType.MERGE,
-    })
-    private List<Keyword> keywords;
 }

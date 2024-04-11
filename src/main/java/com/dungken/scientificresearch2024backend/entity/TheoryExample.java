@@ -14,7 +14,8 @@ public class TheoryExample {
     @Column(name = "example_id")
     private int exampleId;
 
-    @Column(name = "answer")
+    @Column(name = "answer", columnDefinition = "LONGTEXT")
+    @Lob
     private String answer;
 
     @Column(name = "`name`")
@@ -45,6 +46,6 @@ public class TheoryExample {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "theory_id", nullable = false)
-    private Theory theory;
+    @JoinColumn(name = "theory_detail_id", nullable = false)
+    private TheoryDetail theoryDetail;
 }
