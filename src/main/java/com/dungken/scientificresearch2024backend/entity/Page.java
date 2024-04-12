@@ -37,7 +37,8 @@ public class Page {
         updatedAt = new Timestamp(System.currentTimeMillis());
     }
 
-    @Column(name = "detail", length = 1025)
+    @Column(name = "detail", columnDefinition = "LONGTEXT")
+    @Lob
     private String detail;
 
     @ManyToOne(cascade = {

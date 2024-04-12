@@ -8,12 +8,16 @@ public class Endpoints {
             "/account/reset-pass",
             "/user/search/existsByUsername",
             "/user/search/existsByEmail",
+
             "/post-detail",
             "/post-detail/**",
+
+            "/page",
+            "/page/**",
+
             "/theory-detail",
             "/api/theory/cat/**",
             "/theory-detail/**",
-
             "/theory-cat",
             "/theory-cat/**",
             "/theory-example",
@@ -22,6 +26,7 @@ public class Endpoints {
             "/theory-keyword/**",
             "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
             "/api/theory/keyword/search/**",
+
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
@@ -50,10 +55,12 @@ public class Endpoints {
             "/user/search/findByUsernameContaining/**",
             "/permission",
             "/permission/**",
+
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
             "/post-detail/**",
+
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
@@ -63,6 +70,7 @@ public class Endpoints {
             "/theory-keyword",
             "/theory-keyword/**",
             "/api/theory/cat/**",
+
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -74,14 +82,17 @@ public class Endpoints {
             "/permission/**",
             "/role/add",
             "/role/**",
+
             "/post-cat",
             "/post-cat/**",
             "/api/post/add",
+
+            "/api/page/add",
+
             "/api/theory/add",
             "/api/theory/cat/add",
             "/api/theory/example/add",
             "/api/theory/keyword/add",
-
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
@@ -100,16 +111,22 @@ public class Endpoints {
             "/role",
             "/role/**",
             "/role/update",
+
             "/post-cat",
             "/post-cat/**",
             "/api/post",
             "/api/post/**",
             "/api/post/update",
+
+            "/page",
+            "/page/**",
+
+            "/api/page/update",
+
             "/api/theory/update",
             "/api/theory/cat/update",
             "/api/theory/example/update",
             "/api/theory/keyword/update",
-
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
@@ -124,10 +141,15 @@ public class Endpoints {
             "/permission/**",
             "/role",
             "/role/**",
+
             "/post-cat",
             "/post-cat/**",
             "/post-detail",
             "/post-detail/**",
+
+            "/page",
+            "/page/**",
+
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
