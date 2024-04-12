@@ -2,14 +2,18 @@ package com.dungken.scientificresearch2024backend.controller;
 
 import com.dungken.scientificresearch2024backend.dao.TheoryDetailRepository;
 import com.dungken.scientificresearch2024backend.dao.UserRepository;
+import com.dungken.scientificresearch2024backend.dto.TheoryDetailRequest;
 import com.dungken.scientificresearch2024backend.dto.TheoryKeywordRequest;
 import com.dungken.scientificresearch2024backend.entity.TheoryDetail;
 import com.dungken.scientificresearch2024backend.entity.TheoryKeyword;
 import com.dungken.scientificresearch2024backend.entity.User;
 import com.dungken.scientificresearch2024backend.service.TheoryKeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/theory/keyword")
@@ -64,5 +68,20 @@ public class TheoryKeywordController {
 
         theoryKeywordService.updateTheoryKeyword(theoryKeyword);
         return ResponseEntity.ok("Update theory keyword successfully!");
+    }
+
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<?> search(@PathVariable String keyword) {
+        TheoryDetail theoryDetailOptional = theoryKeywordService.findTheoryDetailByKeywordEqualsIgnoreCase(keyword);
+        if (theoryDetailOptional != null) {
+            TheoryDetailRequest reducedDetail = new TheoryDetailRequest();
+            reducedDetail.setContent(theoryDetailOptional.getContent());
+            reducedDetail.setTitle(theoryDetailOptional.getTitle());
+            reducedDetail.setTheoryCatId(theoryDetailOptional.getTheoryCategory().getTheoryCatId());
+
+            return new ResponseEntity<>(reducedDetail, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

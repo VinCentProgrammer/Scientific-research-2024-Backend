@@ -9,4 +9,5 @@ public interface TheoryKeywordService {
     public TheoryKeyword addTheoryKeyword(TheoryKeyword theoryKeyword);
     public TheoryKeyword updateTheoryKeyword(TheoryKeyword theoryKeyword);
     public TheoryKeyword findById(int id);
+    public TheoryDetail findTheoryDetailByKeywordEqualsIgnoreCase(String keyword);
 }

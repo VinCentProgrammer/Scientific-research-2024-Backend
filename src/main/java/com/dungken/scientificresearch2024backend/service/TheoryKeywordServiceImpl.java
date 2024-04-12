@@ -35,5 +35,10 @@ public class TheoryKeywordServiceImpl implements TheoryKeywordService{
         return theoryKeywordRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public TheoryDetail findTheoryDetailByKeywordEqualsIgnoreCase(String keyword) {
+        return theoryKeywordRepository.findTheoryDetailByKeywordEqualsIgnoreCase(keyword).orElse(null);
+    }
+
 
 }

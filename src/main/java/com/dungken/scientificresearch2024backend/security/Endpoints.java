@@ -20,6 +20,8 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
+            "/api/theory/keyword/search/**",
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
