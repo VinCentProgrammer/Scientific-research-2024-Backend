@@ -33,9 +33,6 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "comment")
-    private String comment;
-
     @Column(name = "address")
     private String address;
 
@@ -66,16 +63,6 @@ public class User {
     @Column(name = "active_code")
     private String activeCode;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {
-            CascadeType.DETACH, CascadeType.REFRESH,
-            CascadeType.PERSIST, CascadeType.MERGE,
-    })
-    @JoinTable(
-            name = "user_thread",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "thread_id")
-    )
-    private List<Thread> threads;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
@@ -123,4 +110,16 @@ public class User {
             CascadeType.PERSIST, CascadeType.MERGE,
     })
     private List<TheoryKeyword> theoryKeywords;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<ThreadCategory> threadCategories;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<Thread> threads;
 }

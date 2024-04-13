@@ -3,31 +3,23 @@ package com.dungken.scientificresearch2024backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Data
-@Table(name = "post_detail")
-public class PostDetail {
+@Table(name = "thread_image")
+public class ThreadImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
-    private int postId;
+    @Column(name = "imgId")
+    private int imgId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "`name`")
+    private String name;
 
-    @Column(name = "`desc`")
-    private String desc;
-
-    @Column(name = "detail", columnDefinition = "LONGTEXT")
+    @Column(name = "path", columnDefinition = "LONGTEXT")
     @Lob
-    private String detail;
-
-    @Column(name = "thumbnail", columnDefinition = "LONGTEXT")
-    @Lob
-    private String thumbnail;
+    private String path;
 
     @Column(name = "`created_at`")
     private Timestamp createdAt;
@@ -47,13 +39,7 @@ public class PostDetail {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "post_cat_id", nullable = false)
-    private PostCategory postCategory;
+    @JoinColumn(name = "thread_id", nullable = false)
+    private Thread thread;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH
-    })
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 }

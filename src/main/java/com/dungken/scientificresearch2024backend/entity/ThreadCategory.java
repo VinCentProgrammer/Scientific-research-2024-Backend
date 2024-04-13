@@ -3,31 +3,23 @@ package com.dungken.scientificresearch2024backend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "post_detail")
-public class PostDetail {
+@Table(name = "thread_cat")
+public class ThreadCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
-    private int postId;
+    @Column(name = "thread_cat_id")
+    private int threadCatId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "`name`")
+    private String name;
 
-    @Column(name = "`desc`")
-    private String desc;
-
-    @Column(name = "detail", columnDefinition = "LONGTEXT")
-    @Lob
-    private String detail;
-
-    @Column(name = "thumbnail", columnDefinition = "LONGTEXT")
-    @Lob
-    private String thumbnail;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "`created_at`")
     private Timestamp createdAt;
@@ -47,13 +39,12 @@ public class PostDetail {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "post_cat_id", nullable = false)
-    private PostCategory postCategory;
-
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH
-    })
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "threadCategory", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<Thread> thread;
 }

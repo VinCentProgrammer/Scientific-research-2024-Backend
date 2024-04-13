@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 @Entity
 @Data
@@ -14,26 +15,61 @@ public class Thread {
     @Column(name = "thread_id")
     private int threadId;
 
-    @Column(name = "question")
-    private String question;
+    @Column(name = "replies")
+    private int replies;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "views")
+    private int views;
 
-    @Column(name = "number_replies")
-    private int numberReplies;
+    @Column(name = "votes")
+    private int votes;
 
-    @Column(name = "number_view")
-    private int numberView;
+    @Column(name = "status")
+    private boolean status;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {
+    @Column(name = "short_question")
+    private String shortQuestion;
+
+    @Column(name = "detail_question")
+    private String detailQuestion;
+
+    @Column(name = "`created_at`")
+    private Timestamp createdAt;
+    @PrePersist
+    private void onCreate() {
+        createdAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "`updated_at`")
+    private Timestamp updatedAt;
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH
+    })
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH
+    })
+    @JoinColumn(name = "thread_cat_id", nullable = false)
+    private ThreadCategory threadCategory;
+
+    @OneToMany(mappedBy = "thread", fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })
-    @JoinTable(
-            name = "user_thread",
-            joinColumns = @JoinColumn(name = "thread_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users;
+    private List<ThreadImage> threadImages;
+
+    @OneToMany(mappedBy = "thread", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
+            CascadeType.PERSIST, CascadeType.MERGE,
+    })
+    private List<ThreadComment> threadComments;
 }

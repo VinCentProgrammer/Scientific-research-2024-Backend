@@ -162,7 +162,6 @@ public class AccountService {
             userUpdate.setGender(user.isGender());
             userUpdate.setAddress(user.getAddress());
             userUpdate.setAvatar(user.getAvatar());
-            userUpdate.setComment(user.getComment());
             userUpdate.setPhoneNumber(user.getPhoneNumber());
             userUpdate.setUpdatedAt(currentTimestamp);
 

@@ -12,6 +12,9 @@ public class Endpoints {
             "/post-detail",
             "/post-detail/**",
 
+            "/post-cat",
+            "/post-cat/**",
+
             "/page",
             "/page/**",
 
