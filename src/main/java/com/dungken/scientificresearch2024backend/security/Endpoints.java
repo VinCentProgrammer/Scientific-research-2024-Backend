@@ -80,6 +80,9 @@ public class Endpoints {
             "/thread",
             "/thread/**",
 
+            "/thread-comment",
+            "/thread-comment/**",
+
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -114,6 +117,8 @@ public class Endpoints {
             "/api/thread/cat/add",
 
             "/api/thread/add",
+
+            "/api/thread/comment/add",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
             "/api/user/update",
@@ -152,6 +157,8 @@ public class Endpoints {
             "/api/thread/cat/update",
 
             "/api/thread/update",
+
+            "/api/thread/comment/update",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
@@ -181,5 +188,8 @@ public class Endpoints {
 
             "/thread",
             "/thread/**",
+
+            "/thread-comment",
+            "/thread-comment/**",
     };
 }
