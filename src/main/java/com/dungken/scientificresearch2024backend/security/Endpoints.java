@@ -74,6 +74,12 @@ public class Endpoints {
             "/theory-keyword/**",
             "/api/theory/cat/**",
 
+            "/thread-cat",
+            "/thread-cat/**",
+
+            "/thread",
+            "/thread/**",
+
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
             "/api/user/add",
@@ -104,6 +110,10 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+
+            "/api/thread/cat/add",
+
+            "/api/thread/add",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
             "/api/user/update",
@@ -138,6 +148,10 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+
+            "/api/thread/cat/update",
+
+            "/api/thread/update",
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
@@ -161,5 +175,11 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+
+            "/thread-cat",
+            "/thread-cat/**",
+
+            "/thread",
+            "/thread/**",
     };
 }
