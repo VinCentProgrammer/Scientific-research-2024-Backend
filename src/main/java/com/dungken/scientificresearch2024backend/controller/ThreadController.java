@@ -48,7 +48,7 @@ public class ThreadController {
         thread.setThreadCategory(threadCategory);
 
         threadService.addThread(thread);
-        return ResponseEntity.ok("Insert thread successfully!");
+        return ResponseEntity.ok().body(thread.getThreadId());
     }
 
     @PutMapping("/update")
@@ -80,4 +80,6 @@ public class ThreadController {
         threadService.updateThread(threadExisting);
         return ResponseEntity.ok("Update thread successfully!");
     }
+
+
 }

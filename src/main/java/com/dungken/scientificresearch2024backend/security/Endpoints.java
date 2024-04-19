@@ -4,6 +4,10 @@ public class Endpoints {
     public static final String front_end_host = "http://localhost:3000";
     /////////////// PUBLIC ///////////////
     public static final String[] PUBLIC_GET_ENDPOINS = {
+
+            "user/",
+            "user/**",
+
             "/account/active",
             "/account/reset-pass",
             "/user/search/existsByUsername",
@@ -18,6 +22,18 @@ public class Endpoints {
             "/page",
             "/page/**",
 
+            "/thread",
+            "/thread/**",
+
+            "/thread-cat",
+            "/thread-cat/**",
+
+            "/thread-comment",
+            "/thread-comment/**",
+
+            "/thread-image",
+            "/thread-image/**",
+
             "/theory-detail",
             "/api/theory/cat/**",
             "/theory-detail/**",
@@ -30,18 +46,27 @@ public class Endpoints {
             "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
             "/api/theory/keyword/search/**",
 
+
+
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
             "/user",
             "/account/reset-password",
-            "/account/update-password"
+            "/account/update-password",
+            "/api/thread/update"
+
     };
 
     public static final String[] PUBLIC_POST_ENDPOINS = {
             "/account/register",
             "/account/reset-password",
             "/account/login",
+            "/api/thread/add",
+            "/api/thread/add/**",
+            "/api/thread/comment/add",
+            "/api/thread/comment/add/**",
+            "/api/thread/image/add"
 
     };
 
