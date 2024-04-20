@@ -7,6 +7,8 @@ import com.dungken.scientificresearch2024backend.entity.TheoryDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TheoryCatServiceImpl implements TheoryCatService{
     private TheoryCategoryRepository theoryCategoryRepository;
@@ -31,5 +33,10 @@ public class TheoryCatServiceImpl implements TheoryCatService{
     @Override
     public TheoryCategory findById(int id) {
         return theoryCategoryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<TheoryCategory> findAll() {
+        return theoryCategoryRepository.findAll();
     }
 }

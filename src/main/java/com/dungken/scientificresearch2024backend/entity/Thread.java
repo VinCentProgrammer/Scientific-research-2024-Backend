@@ -30,7 +30,8 @@ public class Thread {
     @Column(name = "short_question")
     private String shortQuestion;
 
-    @Column(name = "detail_question")
+    @Column(name = "detail_question", columnDefinition = "LONGTEXT")
+    @Lob
     private String detailQuestion;
 
     @Column(name = "`created_at`")

@@ -23,7 +23,8 @@ public class ThreadComment {
     @Column(name = "user_id")
     private int userId;
 
-    @Column(name = "comment")
+    @Column(name = "comment", columnDefinition = "LONGTEXT")
+    @Lob
     private String comment;
 
     @Column(name = "status")

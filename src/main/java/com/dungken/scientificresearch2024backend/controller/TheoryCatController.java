@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/theory/cat")
 public class TheoryCatController {
@@ -24,7 +27,20 @@ public class TheoryCatController {
         this.theoryCatService = theoryCatService;
     }
 
-    
+    @GetMapping("")
+    public ResponseEntity<?> getAllTheoryCats(){
+        List<TheoryCategory> theoryCats = theoryCatService.findAll();
+        List<TheoryCategoryRequest> theoryCatDTOs = new ArrayList<>();
+        for (TheoryCategory theoryCat : theoryCats) {
+            TheoryCategoryRequest dto = new TheoryCategoryRequest();
+            dto.setTheoryCatId(theoryCat.getTheoryCatId());
+            dto.setTheoryParentCatId(theoryCat.getTheoryParentCatId());
+            dto.setName(theoryCat.getName());
+            theoryCatDTOs.add(dto);
+        }
+        return ResponseEntity.ok().body(theoryCatDTOs);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addTheoryCat(@RequestBody TheoryCategoryRequest theoryCategoryRequest){
         User user = userRepository.findById(theoryCategoryRequest.getUserId()).orElse(null);

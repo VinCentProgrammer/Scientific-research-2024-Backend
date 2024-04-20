@@ -9,6 +9,8 @@ import com.dungken.scientificresearch2024backend.entity.TheoryDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TheoryServiceImpl implements TheoryService{
     private TheoryDetailRepository theoryDetailRepository;
@@ -33,6 +35,11 @@ public class TheoryServiceImpl implements TheoryService{
     @Override
     public TheoryDetail findById(int id) {
         return theoryDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<TheoryDetail> findAll() {
+        return theoryDetailRepository.findAll();
     }
 
     @Override

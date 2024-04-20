@@ -4,6 +4,7 @@ import com.dungken.scientificresearch2024backend.dao.PostCategoryRepository;
 import com.dungken.scientificresearch2024backend.dao.TheoryDetailRepository;
 import com.dungken.scientificresearch2024backend.dao.UserRepository;
 import com.dungken.scientificresearch2024backend.dto.PostRequest;
+import com.dungken.scientificresearch2024backend.dto.TheoryCategoryRequest;
 import com.dungken.scientificresearch2024backend.dto.TheoryDetailRequest;
 import com.dungken.scientificresearch2024backend.entity.*;
 import com.dungken.scientificresearch2024backend.service.PostService;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +30,19 @@ public class TheoryController {
         this.userRepository = userRepository;
         this.theoryService = theoryService;
         this.theoryDetailRepository = theoryDetailRepository;
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getAllTheoryCats(){
+        List<TheoryDetail> theoryDetails = theoryService.findAll();
+        List<TheoryDetailRequest> theoryDTOs = new ArrayList<>();
+        for (TheoryDetail theoryDetail : theoryDetails) {
+            TheoryDetailRequest dto = new TheoryDetailRequest();
+            dto.setTheoryDetailId(theoryDetail.getTheoryDetailId());
+            dto.setTitle(theoryDetail.getTitle());
+            theoryDTOs.add(dto);
+        }
+        return ResponseEntity.ok().body(theoryDTOs);
     }
 
     @GetMapping("/cat/{theoryCatId}")

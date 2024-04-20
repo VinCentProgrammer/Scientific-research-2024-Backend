@@ -35,9 +35,11 @@ public class Endpoints {
             "/thread-image/**",
 
             "/theory-detail",
+            "/api/theory",
             "/api/theory/cat/**",
             "/theory-detail/**",
             "/theory-cat",
+            "/api/theory/cat",
             "/theory-cat/**",
             "/theory-example",
             "/theory-example/**",
@@ -45,9 +47,6 @@ public class Endpoints {
             "/theory-keyword/**",
             "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
             "/api/theory/keyword/search/**",
-
-
-
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
