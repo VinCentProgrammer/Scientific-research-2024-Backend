@@ -136,6 +136,12 @@ public class AccountService {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         user.setCreatedAt(currentTimestamp);
 
+//        List<Role> roles = new ArrayList<>();
+//        Role role = new Role();
+//        role.setRoleName("USER");
+//        roles.add(role);
+//        user.setRoles(roles);
+
         // Lưu người dùng người dùng vào DB
         userRepository.save(user);
 

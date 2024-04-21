@@ -49,6 +49,7 @@ public class JwtService {
         }
 
         claims.put("userId", user.getUserId());
+        claims.put("username", user.getUsername());
         claims.put("isAdmin", isAdmin);
         claims.put("isStaff", isStaff);
         claims.put("isUser", isUser);
