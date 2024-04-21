@@ -146,7 +146,6 @@ public class AccountService {
     }
 
     public ResponseEntity<?> updateUser(User user){
-
         User userUpdate = userRepository.findByUserId(user.getUserId());
         if(userUpdate == null) {
             return ResponseEntity.badRequest().body(new Notification("User khong ton tai!"));

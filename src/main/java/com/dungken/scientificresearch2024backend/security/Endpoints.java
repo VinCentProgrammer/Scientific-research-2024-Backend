@@ -4,12 +4,11 @@ public class Endpoints {
     public static final String front_end_host = "http://localhost:3000";
     /////////////// PUBLIC ///////////////
     public static final String[] PUBLIC_GET_ENDPOINS = {
+            "/account/active",
+            "/account/reset-pass",
 
             "user/",
             "user/**",
-
-            "/account/active",
-            "/account/reset-pass",
             "/user/search/existsByUsername",
             "/user/search/existsByEmail",
 
@@ -35,14 +34,19 @@ public class Endpoints {
             "/thread-image/**",
 
             "/theory-detail",
-            "/api/theory",
-            "/api/theory/cat/**",
             "/theory-detail/**",
+
             "/theory-cat",
-            "/api/theory/cat",
             "/theory-cat/**",
+
+            "/api/theory",
+
+            "/api/theory/cat/**",
+            "/api/theory/cat",
+
             "/theory-example",
             "/theory-example/**",
+
             "/theory-keyword",
             "/theory-keyword/**",
             "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
@@ -50,36 +54,39 @@ public class Endpoints {
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
-            "/user",
+            "/api/user/update/info",
+
             "/account/reset-password",
             "/account/update-password",
-            "/api/thread/update"
 
+            "/api/thread/update",
     };
 
     public static final String[] PUBLIC_POST_ENDPOINS = {
             "/account/register",
             "/account/reset-password",
             "/account/login",
+
             "/api/thread/add",
             "/api/thread/add/**",
+
             "/api/thread/comment/add",
             "/api/thread/comment/add/**",
+
             "/api/thread/image/add"
 
     };
 
-//    public static final String[] PUBLIC_DELETE_ENDPOINS = {
-//
-//    };
 
     /////////////// ADMIN ///////////////
     public static final String[] ADMIN_GET_ENDPOINS = {
             "/role",
             "/role/**",
+
             "/user",
             "/user/**",
             "/user/search/findByUsernameContaining/**",
+
             "/permission",
             "/permission/**",
 
@@ -106,16 +113,18 @@ public class Endpoints {
 
             "/thread-comment",
             "/thread-comment/**",
-
     };
     public static final String[] ADMIN_POST_ENDPOINS = {
-            "/api/user/add",
-            "/account/register",
-            "/user/**",
             "/user",
+            "/user/**",
+            "/api/user/add",
+
+            "/account/register",
             "/account/login",
+
             "/permission",
             "/permission/**",
+
             "/role/add",
             "/role/**",
 
@@ -145,17 +154,21 @@ public class Endpoints {
             "/api/thread/comment/add",
     };
     public static final String[] ADMIN_PUT_ENDPOINS = {
+            "/user/**",
             "/api/user/update",
+
             "/permission",
             "/permission/**",
-            "/user/**",
+
             "/account/update",
+
             "/role",
             "/role/**",
             "/role/update",
 
             "/post-cat",
             "/post-cat/**",
+
             "/api/post",
             "/api/post/**",
             "/api/post/update",
@@ -186,6 +199,7 @@ public class Endpoints {
     };
     public static final String[] ADMIN_DELETE_ENDPOINS = {
             "/user/**",
+
             "/permission/**",
             "/role",
             "/role/**",
