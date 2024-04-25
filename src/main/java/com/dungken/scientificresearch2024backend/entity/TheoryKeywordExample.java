@@ -4,23 +4,18 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Data
-@Table(name = "theory_detail")
-public class TheoryDetail {
+@Table(name = "theory_keyword_example")
+public class TheoryKeywordExample {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "theory_detail_id")
-    private int theoryDetailId;
+    @Column(name = "keyword_example_id")
+    private int keywordId;
 
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "content", columnDefinition = "LONGTEXT")
-    @Lob
-    private String content;
+    @Column(name = "keyword")
+    private String keyword;
 
     @Column(name = "created_at")
     private Timestamp createdAt;
@@ -43,13 +38,10 @@ public class TheoryDetail {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "theory_cat_id")
-    private TheoryCategory theoryCategory;
-
-    @OneToMany(mappedBy = "theoryDetail", fetch = FetchType.LAZY, cascade = {
-            CascadeType.DETACH, CascadeType.REFRESH,
+    @ManyToOne(cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH
     })
-    private List<TheoryKeyword> theoryKeywords;
+    @JoinColumn(name = "example_id", nullable = false)
+    private TheoryExample theoryExample;
 }

@@ -51,6 +51,11 @@ public class Endpoints {
             "/theory-keyword/**",
             "/theory-keyword/search/findTheoryDetailByKeywordEqualsIgnoreCase/**",
             "/api/theory/keyword/search/**",
+
+            "/theory-keyword-example",
+            "/theory-keyword-example/**",
+            "/theory-keyword-example/search/findTheoryExampleByKeywordEqualsIgnoreCase/**",
+            "/api/theory/example/keyword/search/**",
     };
 
     public static final String[] PUBLIC_PUT_ENDPOINS = {
@@ -103,6 +108,8 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/theory-keyword-example",
+            "/theory-keyword-example/**",
             "/api/theory/cat/**",
 
             "/thread-cat",
@@ -138,6 +145,7 @@ public class Endpoints {
             "/api/theory/cat/add",
             "/api/theory/example/add",
             "/api/theory/keyword/add",
+            "/api/theory/example/keyword/add",
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
@@ -146,6 +154,8 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/theory-keyword-example",
+            "/theory-keyword-example/**",
 
             "/api/thread/cat/add",
 
@@ -182,6 +192,7 @@ public class Endpoints {
             "/api/theory/cat/update",
             "/api/theory/example/update",
             "/api/theory/keyword/update",
+            "/api/theory/example/keyword/update",
             "/theory-detail",
             "/theory-detail/**",
             "/theory-cat",
@@ -190,6 +201,8 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/theory-keyword-example",
+            "/theory-keyword-example/**",
 
             "/api/thread/cat/update",
 
@@ -220,6 +233,8 @@ public class Endpoints {
             "/theory-example/**",
             "/theory-keyword",
             "/theory-keyword/**",
+            "/theory-keyword-example",
+            "/theory-keyword-example/**",
 
             "/thread-cat",
             "/thread-cat/**",

@@ -19,28 +19,23 @@ import org.springframework.web.bind.annotation.*;
 public class TheoryExampleController {
     private UserRepository userRepository;
     private TheoryExampleService theoryExampleService;
-    private TheoryDetailRepository theoryDetailRepository;
 
     @Autowired
-    public TheoryExampleController(UserRepository userRepository, TheoryExampleService theoryExampleService,
-                                   TheoryDetailRepository theoryDetailRepository) {
+    public TheoryExampleController(UserRepository userRepository, TheoryExampleService theoryExampleService) {
         this.userRepository = userRepository;
         this.theoryExampleService = theoryExampleService;
-        this.theoryDetailRepository = theoryDetailRepository;
     }
 
     @PostMapping("/add")
     public ResponseEntity<?> addTheoryExample(@RequestBody TheoryExampleRequest theoryExampleRequest){
         User user = userRepository.findById(theoryExampleRequest.getUserId()).orElse(null);
-        TheoryDetail theoryDetail = theoryDetailRepository.findById(theoryExampleRequest.getTheoryDetailId()).orElse(null);
-        if (user == null && theoryDetail == null) {
+        if (user == null) {
             return ResponseEntity.badRequest().body("User or theory not found");
         }
 
         TheoryExample theoryExample = new TheoryExample();
         theoryExample.setName(theoryExampleRequest.getName());
         theoryExample.setAnswer(theoryExampleRequest.getAnswer());
-        theoryExample.setTheoryDetail(theoryDetail);
         theoryExample.setUser(user);
 
         theoryExampleService.addTheoryExample(theoryExample);
@@ -51,10 +46,8 @@ public class TheoryExampleController {
     public ResponseEntity<?> updateTheoryExample(@RequestBody TheoryExampleRequest theoryExampleRequest){
         TheoryExample theoryExample = theoryExampleService.findById(theoryExampleRequest.getExampleId());
         User user = userRepository.findById(theoryExampleRequest.getUserId()).orElse(null);
-        TheoryDetail theoryDetail = theoryDetailRepository.findById(theoryExampleRequest.getTheoryDetailId()).orElse(null);
 
-
-        if (theoryExample == null && theoryExample == null) {
+        if (theoryExample == null) {
             return ResponseEntity.badRequest().body("Theory or theory example cat not found");
         }
 
@@ -64,7 +57,6 @@ public class TheoryExampleController {
 
         theoryExample.setName(theoryExampleRequest.getName());
         theoryExample.setAnswer(theoryExampleRequest.getAnswer());
-        theoryExample.setTheoryDetail(theoryDetail);
         theoryExample.setUser(user);
 
         theoryExampleService.updateTheoryExample(theoryExample);

@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TheoryExampleRequest {
+public class TheoryKeywordExampleRequest {
+    private int keywordExampleId;
     private int exampleId;
     private int userId;
-    private String answer;
-    private String name;
+    private String keyword;
 }

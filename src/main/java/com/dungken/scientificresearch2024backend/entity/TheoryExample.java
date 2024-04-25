@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -42,10 +43,9 @@ public class TheoryExample {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(cascade = {
+    @OneToMany(mappedBy = "theoryExample", fetch = FetchType.LAZY, cascade = {
+            CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH
     })
-    @JoinColumn(name = "theory_detail_id", nullable = false)
-    private TheoryDetail theoryDetail;
+    private List<TheoryKeywordExample> theoryKeywordExamples;
 }
