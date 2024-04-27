@@ -16,8 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/account")
+@RequestMapping("api/account")
 public class AccountController {
     @Autowired
     private AccountService accountService;

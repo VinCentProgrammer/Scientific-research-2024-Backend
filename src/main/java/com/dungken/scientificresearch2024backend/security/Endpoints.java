@@ -4,8 +4,8 @@ public class Endpoints {
     public static final String front_end_host = "http://localhost:3000";
     /////////////// PUBLIC ///////////////
     public static final String[] PUBLIC_GET_ENDPOINS = {
-            "/account/active",
-            "/account/reset-pass",
+            "api/account/active",
+            "api/account/reset-pass",
 
             "user/",
             "user/**",
@@ -61,16 +61,16 @@ public class Endpoints {
     public static final String[] PUBLIC_PUT_ENDPOINS = {
             "/api/user/update/info",
 
-            "/account/reset-password",
-            "/account/update-password",
+            "api/account/reset-password",
+            "api/account/update-password",
 
             "/api/thread/update",
     };
 
     public static final String[] PUBLIC_POST_ENDPOINS = {
-            "/account/register",
-            "/account/reset-password",
-            "/account/login",
+            "api/account/register",
+            "api/account/reset-password",
+            "api/account/login",
 
             "/api/thread/add",
             "/api/thread/add/**",
@@ -126,8 +126,8 @@ public class Endpoints {
             "/user/**",
             "/api/user/add",
 
-            "/account/register",
-            "/account/login",
+            "api/account/register",
+            "api/account/login",
 
             "/permission",
             "/permission/**",
@@ -170,7 +170,7 @@ public class Endpoints {
             "/permission",
             "/permission/**",
 
-            "/account/update",
+            "api/account/update",
 
             "/role",
             "/role/**",
