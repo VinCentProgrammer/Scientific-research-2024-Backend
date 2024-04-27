@@ -85,8 +85,8 @@ public class Endpoints {
 
     /////////////// ADMIN ///////////////
     public static final String[] ADMIN_GET_ENDPOINS = {
-            "/role",
-            "/role/**",
+            "api/role",
+            "api/role/**",
 
             "/user",
             "/user/**",
@@ -132,8 +132,8 @@ public class Endpoints {
             "/permission",
             "/permission/**",
 
-            "/role/add",
-            "/role/**",
+            "api/role/add",
+            "api/role/**",
 
             "/post-cat",
             "/post-cat/**",
@@ -172,9 +172,9 @@ public class Endpoints {
 
             "api/account/update",
 
-            "/role",
-            "/role/**",
-            "/role/update",
+            "api/role",
+            "api/role/**",
+            "api/role/update",
 
             "/post-cat",
             "/post-cat/**",
@@ -214,8 +214,8 @@ public class Endpoints {
             "/user/**",
 
             "/permission/**",
-            "/role",
-            "/role/**",
+            "api/role",
+            "api/role/**",
 
             "/post-cat",
             "/post-cat/**",
