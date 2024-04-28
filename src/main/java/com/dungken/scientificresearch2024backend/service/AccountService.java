@@ -49,7 +49,7 @@ public class AccountService {
         }
 
         User savedUser = new User();
-
+        // set info user
         savedUser.setUserId(userRequest.getUserId());
         savedUser.setUsername(userRequest.getUsername());
         savedUser.setEmail(userRequest.getEmail());
@@ -59,14 +59,15 @@ public class AccountService {
         savedUser.setFirstname(userRequest.getFirstname());
         savedUser.setPhoneNumber(userRequest.getPhoneNumber());
         savedUser.setAvatar(userRequest.getAvatar());
-
-
+        // Mã hóa mật khẩu
         String encryptPassword = passwordEncoder.encode(userRequest.getPassword());
         savedUser.setPassword(encryptPassword);
 
+        // Set thong tin kich hoat tai khoan user
         savedUser.setActive(false);
         savedUser.setActiveCode(generateActivationCode());
 
+        // Set role cho user
         List<Role> roles = new ArrayList<>();
         for(Integer roleId : userRequest.getRoles()) {
             Role role = roleRepository.findById(roleId).orElse(null);
@@ -74,10 +75,13 @@ public class AccountService {
                 roles.add(role);
             }
         }
-
         savedUser.setRoles(roles);
 
+        // Luu user xuong db
         userRepository.save(savedUser);
+        // Gui mail kich hoat tai khoan nguoi dung
+        sendActivationEmail(savedUser.getEmail(), savedUser.getActiveCode());
+
         return ResponseEntity.ok(savedUser);
     }
 
@@ -114,42 +118,39 @@ public class AccountService {
         return ResponseEntity.ok(user);
     }
 
-    public ResponseEntity<?> registerUser(User user){
-        // Kiểm tra tên đăng nhập đã tồn tại chưa?
-        if(userRepository.existsByUsername(user.getUsername())){
-            return ResponseEntity.badRequest().body(new Notification("Username available."));
-        }
-
-        // Kiểm tra email đã tồn tại chưa?
-        if(userRepository.existsByEmail(user.getEmail())){
-            return ResponseEntity.badRequest().body(new Notification("Email available."));
-        }
-
-        // Mã hóa mật khẩu
-        String encryptPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptPassword);
-
-        // Set thong tin kich hoat tai khoan user
-        user.setActive(false);
-        user.setActiveCode(generateActivationCode());
-
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        user.setCreatedAt(currentTimestamp);
-
+//    public ResponseEntity<?> registerUser(User user){
+//        // Kiểm tra tên đăng nhập đã tồn tại chưa?
+//        if(userRepository.existsByUsername(user.getUsername())){
+//            return ResponseEntity.badRequest().body(new Notification("Username available."));
+//        }
+//
+//        // Kiểm tra email đã tồn tại chưa?
+//        if(userRepository.existsByEmail(user.getEmail())){
+//            return ResponseEntity.badRequest().body(new Notification("Email available."));
+//        }
+//
+//        // Mã hóa mật khẩu
+//        String encryptPassword = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(encryptPassword);
+//
+//        // Set thong tin kich hoat tai khoan user
+//        user.setActive(false);
+//        user.setActiveCode(generateActivationCode());
+//
 //        List<Role> roles = new ArrayList<>();
 //        Role role = new Role();
 //        role.setRoleName("USER");
 //        roles.add(role);
 //        user.setRoles(roles);
-
-        // Lưu người dùng người dùng vào DB
-        userRepository.save(user);
-
-        // Gui mail kich hoat tai khoan nguoi dung
-        sendActivationEmail(user.getEmail(), user.getActiveCode());
-
-        return ResponseEntity.ok("Sign Up Success");
-    }
+//
+//        // Lưu người dùng người dùng vào DB
+//        userRepository.save(user);
+//
+//        // Gui mail kich hoat tai khoan nguoi dung
+//        sendActivationEmail(user.getEmail(), user.getActiveCode());
+//
+//        return ResponseEntity.ok("Sign Up Success");
+//    }
 
     public ResponseEntity<?> updateUser(User user){
         User userUpdate = userRepository.findByUserId(user.getUserId());

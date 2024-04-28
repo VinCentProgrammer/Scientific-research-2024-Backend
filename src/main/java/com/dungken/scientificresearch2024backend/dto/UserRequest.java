@@ -124,4 +124,21 @@ public class UserRequest {
     public void setRoles(List<Integer> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "UserRequest{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

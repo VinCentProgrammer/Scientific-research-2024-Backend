@@ -25,14 +25,12 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addUser(@RequestBody UserRequest userRequest){
-        ResponseEntity<?> response = accountService.addUser(userRequest);
-        return response;
+        return accountService.addUser(userRequest);
     }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest){
-        ResponseEntity<?> response = accountService.updateUser(userRequest);
-        return response;
+        return accountService.updateUser(userRequest);
     }
 
     @PutMapping("/update/info")

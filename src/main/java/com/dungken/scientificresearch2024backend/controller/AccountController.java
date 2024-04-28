@@ -25,11 +25,11 @@ public class AccountController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody User user){
-        ResponseEntity<?> response = accountService.registerUser(user);
-        return response;
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<?> registerUser(@Validated @RequestBody User user){
+//        ResponseEntity<?> response = accountService.registerUser(user);
+//        return response;
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateUser(@Validated @RequestBody User user){

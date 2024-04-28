@@ -66,11 +66,5 @@ public class Thread {
             CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.PERSIST, CascadeType.MERGE,
     })
-    private List<ThreadImage> threadImages;
-
-    @OneToMany(mappedBy = "thread", fetch = FetchType.LAZY, cascade = {
-            CascadeType.DETACH, CascadeType.REFRESH,
-            CascadeType.PERSIST, CascadeType.MERGE,
-    })
     private List<ThreadComment> threadComments;
 }
