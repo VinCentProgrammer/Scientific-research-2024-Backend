@@ -193,7 +193,7 @@ public class AccountService {
         String text = "Vui lòng sử dụng mã sau để kich hoạt cho tài khoản <"+email+">:" +
                 "<html><body><br/><h1>"+activeCode+"</h1></body></html>";
         text+="<br/> Click vào đường link để kích hoạt tài khoản: ";
-        String url = "http://localhost:3000/active/"+email+"/"+activeCode;
+        String url = "http://dungken.pro.vn/active/"+email+"/"+activeCode;
         text+=("<br/> <a href="+url+">"+url+"</a> ");
 
         mailService.sendMail("phpmaster.dungken.dev@gmail.com", email, subject, text);
@@ -246,7 +246,7 @@ public class AccountService {
     private void sendMailResetPassword(String email, String activeCode){
         String subject = "Yêu cầu lấy lại mật khẩu của bạn tại Website hỗ trợ học toán rời rạc";
         String text ="Click vào đường link để lấy lại mật khẩu: ";
-        String url = "http://localhost:3000/reset-pass/"+email+"/"+activeCode;
+        String url = "http://dungken.pro.vn/reset-pass/"+email+"/"+activeCode;
         text+=("<br/> <a href="+url+">"+url+"</a> ");
 
         mailService.sendMail("phpmaster.dungken.dev@gmail.com", email, subject, text);
